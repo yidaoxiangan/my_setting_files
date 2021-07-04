@@ -4,21 +4,10 @@ set guifont=FiraCode\ 12
 "Always show the status line.
 set laststatus=2
 
-" Set the content of status line.
-" %F: Path of current.
-" %r: 如果readonly,会显示[RO]
-
-" %B: 显示光标下字符的编码值,十六进制.
-" %l:光标所在的行号. %v:光标所在的虚拟列号.
-" %P: 显示当前内容在整个文件中的百分比.
-" %H和%M是strftime()函数的参数,获取时间.
-set statusline=%F%r\ HEX=%B\ row\:%l\ col\:%v\ %P\ %{strftime(\"%H:%M\")}
-
-" Setting the line number of vim
-:set number
+set number
 
 " When a file is changed outside vim, audo read it
-:set autoread
+set autoread
 
 "自动保存"
 set autowrite
@@ -27,7 +16,7 @@ set autowrite
 set clipboard+=unnamed
 
 " 高亮显示匹配的括号
-:set showmatch
+set showmatch
 
 " 高亮显示所有搜索到的内容.后面用map映射
 " 快捷键来方便关闭当前搜索的高亮.
@@ -46,9 +35,9 @@ set noeb
 " cursorlineopt=number只高亮行号部分,不影响正文内容
 " 的显示. 在其他容易看到光标的终端上可以去掉这两个设置.
 set cursorline
-set cursorcolumn
-highlight CursorLine   cterm=NONE ctermbg=black ctermfg=green guibg=NONE guifg=NONE
-highlight CursorColumn cterm=NONE ctermbg=black ctermfg=green guibg=NONE guifg=NONE
+"set cursorcolumn
+"highlight CursorLine   cterm=NONE ctermbg=gray ctermfg=green guibg=NONE guifg=NONE
+"highlight CursorColumn cterm=NONE ctermbg=gray ctermfg=green guibg=NONE guifg=NONE
 "set cursorlineopt=number
 
 " 开启语法高亮
@@ -108,5 +97,32 @@ set foldenable
 "根据语法折叠
 set fdm=syntax
 
-"手动折叠
-"set fdm=manual
+colorscheme molokai
+
+"set t_Co=256
+if has("termguicolors")
+    set termguicolors
+endif
+"Plugin
+call plug#begin('~/.vim/plugged')
+Plug 'vim-airline/vim-airline'
+Plug 'airblade/vim-gitgutter'
+Plug 'vim-airline/vim-airline-themes'
+Plug 'preservim/nerdtree'
+call plug#end()
+
+"Plugin Setting
+map <C-n> :NERDTreeToggle<CR>
+let g:airline_powerline_fonts = 1  " 支持 powerline 字体
+let g:airline#extensions#tabline#enabled = 1 " 显示窗口tab和buffer
+let g:airline_theme='molokai'  " murmur配色不错
+if !exists('g:airline_symbols')
+    let g:airline_symbols = {}
+endif
+
+let g:airline_left_sep = '▶'
+let g:airline_left_alt_sep = ' '
+let g:airline_right_sep = ' '
+let g:airline_right_alt_sep = ' '
+let g:airline_symbols.linenr = ' '
+let g:airline_symbols.branch = ' '
