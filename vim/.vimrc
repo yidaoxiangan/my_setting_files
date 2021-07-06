@@ -99,10 +99,12 @@ set fdm=syntax
 
 colorscheme molokai
 
-"set t_Co=256
-if has("termguicolors")
-    set termguicolors
-endif
+set t_Co=256
+
+"if has("termguicolors")
+"    set termguicolors
+"endif
+
 "Plugin
 call plug#begin('~/.vim/plugged')
 Plug 'vim-airline/vim-airline'
